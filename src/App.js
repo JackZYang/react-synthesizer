@@ -1,13 +1,17 @@
-import React, {Component} from 'react';
-import './App.css';
-import Oscillator from './Oscillator.js'
+import React, { Component } from "react";
+import "./App.css";
+import Oscillator from "./Oscillator.js";
+import PianoRoll from "./PianoRoll.js";
 
 class App extends Component {
-
-  render(){
+  render() {
     return (
       <div className="App">
-        <Oscillator />
+        <Oscillator
+          render={(playSound, stopSound) => (
+            <PianoRoll playSound={playSound} stopSound={stopSound} />
+          )}
+        />
       </div>
     );
   }

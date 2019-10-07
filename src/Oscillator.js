@@ -1,10 +1,11 @@
 import React, { Component } from "react";
 
-let audioContext = new (window.AudioContext || window.webkitAudioContext)();
+let audioContext = new AudioContext(),
+  oscillator;
 
 class Oscillator extends Component {
   state = {
-    waveform: "square",
+    waveform: "sin",
     playing: false
   };
 
@@ -35,15 +36,20 @@ class Oscillator extends Component {
   };
 
   playSound = () => {
-    var oscillator = audioContext.createOscillator();
+    oscillator = audioContext.createOscillator();
     oscillator.connect(audioContext.destination);
     oscillator.type = this.state.waveform;
-    oscillator.start();
+    oscillator.start(audioContext.currentTime);
+  };
+
+  stopSound = () => {
+    oscillator.stop();
   };
 
   render() {
     return (
-      <div>
+      <div>{this.props.render(this.playSound, this.stopSound)}</div>
+      /*       <div>
         <button onClick={this.playSound}>play</button>
         <button onClick={this.changeWaveform} id="sin">
           Sin
@@ -58,7 +64,7 @@ class Oscillator extends Component {
           Sawtooth
         </button>
         {this.state.waveform}
-      </div>
+      </div> */
     );
   }
 }
