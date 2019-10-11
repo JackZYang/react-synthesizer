@@ -15,12 +15,10 @@ function PianoRoll(props) {
     <Piano
       noteRange={{ first: firstNote, last: lastNote }}
       playNote={midiNumber => {
-        props.playSound(Math.pow(2, (midiNumber - 69) / 12) * 440);
-        console.log(midiNumber);
-        console.log(props.oscillators);
+        props.playSound(midiNumber);
       }}
       stopNote={midiNumber => {
-        props.stopSound();
+        props.stopSound(midiNumber);
       }}
       width={500}
       keyboardShortcuts={keyboardShortcuts}

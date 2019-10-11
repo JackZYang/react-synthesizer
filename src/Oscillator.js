@@ -6,8 +6,7 @@ let audioContext = new AudioContext(),
 class Oscillator extends Component {
   state = {
     waveform: "sine",
-    playing: false,
-    oscillators: []
+    oscillators: {}
   };
 
   changeWaveform = e => {
@@ -36,17 +35,20 @@ class Oscillator extends Component {
     }
   };
 
-  playSound = freqNote => {
+  playSound = midiNumber => {
     oscillator = audioContext.createOscillator();
     oscillator.connect(audioContext.destination);
     oscillator.type = this.state.waveform;
-    oscillator.frequency.value = freqNote;
-    this.state.oscillators.push(oscillator);
-    oscillator.start(audioContext.currentTime);
+    oscillator.frequency.value = Math.pow(2, (midiNumber - 69) / 12) * 440;
+    this.state.oscillators[midiNumber] = oscillator;
+    console.log(this.state.oscillators);
+    oscillator.start();
   };
 
-  stopSound = () => {
-    this.state.oscillators.forEach(oscillator => oscillator.stop());
+  stopSound = midiNumber => {
+    this.state.oscillators[midiNumber].stop();
+    delete this.state.oscillators[midiNumber];
+    console.log(this.state.oscillators);
   };
 
   render() {
