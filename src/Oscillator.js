@@ -5,16 +5,17 @@ let audioContext = new AudioContext(),
 
 class Oscillator extends Component {
   state = {
-    waveform: "sin",
-    playing: false
+    waveform: "sine",
+    playing: false,
+    oscillators: []
   };
 
   changeWaveform = e => {
     const id = e.target.id;
     switch (id) {
-      case "sin":
+      case "sine":
         this.setState({
-          waveform: "sin"
+          waveform: "sine"
         });
         break;
       case "square":
@@ -35,36 +36,28 @@ class Oscillator extends Component {
     }
   };
 
-  playSound = () => {
+  playSound = freqNote => {
     oscillator = audioContext.createOscillator();
     oscillator.connect(audioContext.destination);
     oscillator.type = this.state.waveform;
+    oscillator.frequency.value = freqNote;
+    this.state.oscillators.push(oscillator);
     oscillator.start(audioContext.currentTime);
   };
 
   stopSound = () => {
-    oscillator.stop();
+    this.state.oscillators.forEach(oscillator => oscillator.stop());
   };
 
   render() {
     return (
-      <div>{this.props.render(this.playSound, this.stopSound)}</div>
-      /*       <div>
-        <button onClick={this.playSound}>play</button>
-        <button onClick={this.changeWaveform} id="sin">
-          Sin
-        </button>
-        <button onClick={this.changeWaveform} id="square">
-          Square
-        </button>
-        <button onClick={this.changeWaveform} id="triangle">
-          Triangle
-        </button>
-        <button onClick={this.changeWaveform} id="sawtooth">
-          Sawtooth
-        </button>
-        {this.state.waveform}
-      </div> */
+      <div>
+        {this.props.render(
+          this.playSound,
+          this.stopSound,
+          this.state.oscillators
+        )}
+      </div>
     );
   }
 }

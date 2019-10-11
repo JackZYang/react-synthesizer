@@ -8,8 +8,12 @@ class App extends Component {
     return (
       <div className="App">
         <Oscillator
-          render={(playSound, stopSound) => (
-            <PianoRoll playSound={playSound} stopSound={stopSound} />
+          render={(playSound, stopSound, oscillators) => (
+            <PianoRoll
+              playSound={playSound}
+              stopSound={stopSound}
+              oscillators={oscillators}
+            />
           )}
         />
       </div>
