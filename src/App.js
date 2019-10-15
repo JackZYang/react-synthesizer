@@ -1,11 +1,21 @@
 import React, { Component } from "react";
 import "./App.css";
-import Oscillator from "./Oscillator.js";
-import ChangeWaveform from "./ChangeWaveform.js";
-import PianoRoll from "./PianoRoll.js";
+import Oscillator from "./Oscillator";
+import ChangeWaveform from "./ChangeWaveform";
+import Gain from "./Gain";
+import PianoRoll from "./PianoRoll";
 
 class App extends Component {
-  state = { waveform: "sine" };
+  state = {
+    waveform: "sine",
+    gainValue: 0.1
+  };
+
+  changeGain = e => {
+    this.setState({
+      gainValue: e.target.value
+    });
+  };
 
   changeWaveform = e => {
     switch (e.target.value) {
@@ -30,7 +40,6 @@ class App extends Component {
         });
         break;
     }
-    console.log(this.state.waveform);
   };
 
   render() {
@@ -42,7 +51,9 @@ class App extends Component {
             <PianoRoll playSound={playSound} stopSound={stopSound} />
           )}
           waveform={this.state.waveform}
+          gainValue={this.state.gainValue}
         />
+        <Gain changeGain={this.changeGain} gainValue={this.state.gainValue} />
       </div>
     );
   }

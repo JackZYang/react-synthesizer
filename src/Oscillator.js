@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 
 let audioContext = new (window.AudioContext || window.webkitAudioContext)();
+let gainNode = audioContext.createGain();
 
 class Oscillator extends Component {
   state = {
@@ -9,8 +10,12 @@ class Oscillator extends Component {
 
   playSound = midiNumber => {
     let oscillator = audioContext.createOscillator();
-    oscillator.connect(audioContext.destination);
+    // Waveform type
     oscillator.type = this.props.waveform;
+    oscillator.connect(gainNode);
+    gainNode.connect(audioContext.destination);
+    // Gain Value
+    gainNode.gain.value = this.props.gainValue;
     oscillator.frequency.value = Math.pow(2, (midiNumber - 69) / 12) * 440;
     this.setState({
       oscillators: {
@@ -19,6 +24,7 @@ class Oscillator extends Component {
       }
     });
     oscillator.start();
+    console.log(this.props.gainValue);
   };
 
   stopSound = midiNumber => {

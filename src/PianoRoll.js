@@ -20,7 +20,7 @@ function PianoRoll(props) {
       stopNote={midiNumber => {
         props.stopSound(midiNumber);
       }}
-      width={500}
+      width={400}
       keyboardShortcuts={keyboardShortcuts}
     />
   );
