@@ -8,7 +8,7 @@ import PianoRoll from "./PianoRoll";
 class App extends Component {
   state = {
     waveform: "sine",
-    gainValue: 0.1
+    gainValue: 0.15
   };
 
   changeGain = e => {
@@ -46,13 +46,15 @@ class App extends Component {
     return (
       <div className="App">
         <ChangeWaveform changeWaveform={this.changeWaveform} />
-        <Oscillator
-          render={(playSound, stopSound) => (
-            <PianoRoll playSound={playSound} stopSound={stopSound} />
-          )}
-          waveform={this.state.waveform}
-          gainValue={this.state.gainValue}
-        />
+        <div className="piano">
+          <Oscillator
+            render={(playSound, stopSound) => (
+              <PianoRoll playSound={playSound} stopSound={stopSound} />
+            )}
+            waveform={this.state.waveform}
+            gainValue={this.state.gainValue}
+          />
+        </div>
         <Gain changeGain={this.changeGain} gainValue={this.state.gainValue} />
       </div>
     );
