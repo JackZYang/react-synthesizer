@@ -1,12 +1,11 @@
 import React, { Component } from "react";
 import "./App.css";
 import Oscillator from "./Oscillator.js";
+import ChangeWaveform from "./ChangeWaveform.js";
 import PianoRoll from "./PianoRoll.js";
 
 class App extends Component {
-  state = {
-    waveform: "sine"
-  };
+  state = { waveform: "sine" };
 
   changeWaveform = e => {
     switch (e.target.value) {
@@ -31,17 +30,13 @@ class App extends Component {
         });
         break;
     }
+    console.log(this.state.waveform);
   };
 
   render() {
     return (
       <div className="App">
-        <select onChange={this.changeWaveform}>
-          <option value="sine">Sine</option>
-          <option value="square">Square</option>
-          <option value="triangle">Triangle</option>
-          <option value="sawtooth">Sawtooth</option>
-        </select>
+        <ChangeWaveform changeWaveform={this.changeWaveform} />
         <Oscillator
           render={(playSound, stopSound) => (
             <PianoRoll playSound={playSound} stopSound={stopSound} />

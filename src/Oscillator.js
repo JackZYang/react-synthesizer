@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 
-let audioContext = new AudioContext(),
-  oscillator;
+let audioContext = new (window.AudioContext || window.webkitAudioContext)();
 
 class Oscillator extends Component {
   state = {
@@ -9,7 +8,7 @@ class Oscillator extends Component {
   };
 
   playSound = midiNumber => {
-    oscillator = audioContext.createOscillator();
+    let oscillator = audioContext.createOscillator();
     oscillator.connect(audioContext.destination);
     oscillator.type = this.props.waveform;
     oscillator.frequency.value = Math.pow(2, (midiNumber - 69) / 12) * 440;
