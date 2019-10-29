@@ -15,7 +15,7 @@ let Lowpass = ({ knobControl, lowpassFreq }) => {
           step="1"
         />
       </div>
-      {lowpassFreq}
+      {lowpassFreq}Hz
     </div>
   );
 };

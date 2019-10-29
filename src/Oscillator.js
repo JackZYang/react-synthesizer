@@ -32,7 +32,6 @@ class Oscillator extends Component {
       }
     });
     oscillator.start();
-    console.log(this.props.gainValue);
   };
 
   stopSound = midiNumber => {

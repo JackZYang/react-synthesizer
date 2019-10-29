@@ -10,7 +10,7 @@ class App extends Component {
   state = {
     waveform: "sine",
     gainValue: 0.15,
-    lowpassFreq: 500
+    lowpassFreq: 10000
   };
 
   knobControl = e => {
@@ -20,28 +20,9 @@ class App extends Component {
   };
 
   changeWaveform = e => {
-    switch (e.target.value) {
-      case "sine":
-        this.setState({
-          waveform: "sine"
-        });
-        break;
-      case "square":
-        this.setState({
-          waveform: "square"
-        });
-        break;
-      case "triangle":
-        this.setState({
-          waveform: "triangle"
-        });
-        break;
-      case "sawtooth":
-        this.setState({
-          waveform: "sawtooth"
-        });
-        break;
-    }
+    this.setState({
+      waveform: e.target.value
+    });
   };
 
   render() {
