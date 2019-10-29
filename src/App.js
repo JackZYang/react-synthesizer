@@ -1,19 +1,21 @@
 import React, { Component } from "react";
 import "./App.css";
 import Oscillator from "./Oscillator";
+import PianoRoll from "./PianoRoll";
 import ChangeWaveform from "./ChangeWaveform";
 import Gain from "./Gain";
-import PianoRoll from "./PianoRoll";
+import Lowpass from "./Lowpass";
 
 class App extends Component {
   state = {
     waveform: "sine",
-    gainValue: 0.15
+    gainValue: 0.15,
+    lowpassFreq: 500
   };
 
-  changeGain = e => {
+  knobControl = e => {
     this.setState({
-      gainValue: e.target.value
+      [e.target.name]: e.target.value
     });
   };
 
@@ -53,9 +55,14 @@ class App extends Component {
             )}
             waveform={this.state.waveform}
             gainValue={this.state.gainValue}
+            lowpassFreq={this.state.lowpassFreq}
           />
         </div>
-        <Gain changeGain={this.changeGain} gainValue={this.state.gainValue} />
+        <Gain knobControl={this.knobControl} gainValue={this.state.gainValue} />
+        <Lowpass
+          knobControl={this.knobControl}
+          lowpassFreq={this.state.lowpassFreq}
+        />
       </div>
     );
   }
