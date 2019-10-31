@@ -4,16 +4,17 @@ import Oscillator from "./Oscillator";
 import PianoRoll from "./PianoRoll";
 import ChangeWaveform from "./ChangeWaveform";
 import Gain from "./Gain";
-import Lowpass from "./Lowpass";
+import Filter from "./Filter";
 
 class App extends Component {
   state = {
     waveform: "sine",
     gainValue: 0.15,
-    lowpassFreq: 10000
+    filterType: "lowpass",
+    filterFreq: 15000
   };
 
-  knobControl = e => {
+  inputChange = e => {
     this.setState({
       [e.target.name]: e.target.value
     });
@@ -36,13 +37,14 @@ class App extends Component {
             )}
             waveform={this.state.waveform}
             gainValue={this.state.gainValue}
-            lowpassFreq={this.state.lowpassFreq}
+            filterFreq={this.state.filterFreq}
+            filterType={this.state.filterType}
           />
         </div>
-        <Gain knobControl={this.knobControl} gainValue={this.state.gainValue} />
-        <Lowpass
-          knobControl={this.knobControl}
-          lowpassFreq={this.state.lowpassFreq}
+        <Gain inputChange={this.inputChange} gainValue={this.state.gainValue} />
+        <Filter
+          inputChange={this.inputChange}
+          filterFreq={this.state.filterFreq}
         />
       </div>
     );

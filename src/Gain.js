@@ -1,6 +1,6 @@
 import React from "react";
 
-let Gain = ({ knobControl, gainValue }) => {
+let Gain = ({ inputChange, gainValue }) => {
   return (
     <div className="gain" style={{ padding: "20px" }}>
       Gain:
@@ -11,7 +11,7 @@ let Gain = ({ knobControl, gainValue }) => {
           min="0"
           max="1"
           value={gainValue}
-          onChange={knobControl}
+          onChange={inputChange}
           step="0.01"
         />
       </div>

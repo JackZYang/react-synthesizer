@@ -15,9 +15,9 @@ class Oscillator extends Component {
     oscillator.type = this.props.waveform;
     oscillator.connect(biquadFilter);
     biquadFilter.connect(gainNode);
-    biquadFilter.type = "lowpass";
+    biquadFilter.type = this.props.filterType;
     biquadFilter.frequency.setValueAtTime(
-      this.props.lowpassFreq,
+      this.props.filterFreq,
       audioContext.currentTime
     );
     biquadFilter.gain.setValueAtTime(25, audioContext.currentTime);
