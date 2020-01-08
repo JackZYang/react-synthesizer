@@ -1,54 +1,39 @@
-import React, { Component } from "react";
+import React, { useState } from "react";
 import "./App.css";
 import Oscillator from "./Oscillator";
-import PianoRoll from "./PianoRoll";
 import ChangeWaveform from "./ChangeWaveform";
 import Gain from "./Gain";
 import Filter from "./Filter";
 
-class App extends Component {
-  state = {
+const App = () => {
+  const [effects, setEffects] = useState({
     waveform: "sine",
     gainValue: 0.15,
     filterType: "lowpass",
     filterFreq: 15000
+  });
+
+  const inputChange = e => {
+    setEffects({ ...effects, [e.target.name]: e.target.value });
   };
 
-  inputChange = e => {
-    this.setState({
-      [e.target.name]: e.target.value
-    });
-  };
-
-  changeWaveform = e => {
-    this.setState({
-      waveform: e.target.value
-    });
-  };
-
-  render() {
-    return (
-      <div className="App">
-        <ChangeWaveform changeWaveform={this.changeWaveform} />
-        <div className="piano">
-          <Oscillator
-            render={(playSound, stopSound) => (
-              <PianoRoll playSound={playSound} stopSound={stopSound} />
-            )}
-            waveform={this.state.waveform}
-            gainValue={this.state.gainValue}
-            filterFreq={this.state.filterFreq}
-            filterType={this.state.filterType}
-          />
-        </div>
-        <Gain inputChange={this.inputChange} gainValue={this.state.gainValue} />
-        <Filter
-          inputChange={this.inputChange}
-          filterFreq={this.state.filterFreq}
+  return (
+    <div className="App">
+      <div className="piano">
+        <Oscillator
+          waveform={effects.waveform}
+          filterType={effects.filterType}
+          filterFreq={effects.filterFreq}
+          gainValue={effects.gainValue}
         />
       </div>
-    );
-  }
-}
+      <div className="effects">
+        <ChangeWaveform changeWaveform={inputChange} />
+        <Gain inputChange={inputChange} gainValue={effects.gainValue} />
+        <Filter inputChange={inputChange} filterFreq={effects.filterFreq} />
+      </div>
+    </div>
+  );
+};
 
 export default App;

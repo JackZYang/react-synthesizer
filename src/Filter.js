@@ -1,6 +1,6 @@
 import React from "react";
 
-let Filter = ({ inputChange, filterFreq }) => {
+const Filter = ({ inputChange, filterFreq }) => {
   return (
     <div className="filter" style={{ padding: "20px" }}>
       <select name="filterType" onChange={inputChange}>

@@ -1,13 +1,18 @@
 import React from "react";
 
-let ChangeWaveform = ({ changeWaveform }) => {
+const ChangeWaveform = ({ changeWaveform }) => {
   return (
-    <select onChange={changeWaveform}>
-      <option value="sine">Sine</option>
-      <option value="square">Square</option>
-      <option value="triangle">Triangle</option>
-      <option value="sawtooth">Sawtooth</option>
-    </select>
+    <div className="waveform" style={{ padding: "20px" }}>
+      Waveform:
+      <div className="waveform-control">
+        <select name="waveform" onChange={changeWaveform}>
+          <option value="sine">Sine</option>
+          <option value="square">Square</option>
+          <option value="triangle">Triangle</option>
+          <option value="sawtooth">Sawtooth</option>
+        </select>
+      </div>
+    </div>
   );
 };
 

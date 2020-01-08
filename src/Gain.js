@@ -1,6 +1,6 @@
 import React from "react";
 
-let Gain = ({ inputChange, gainValue }) => {
+const Gain = ({ inputChange, gainValue }) => {
   return (
     <div className="gain" style={{ padding: "20px" }}>
       Gain:
