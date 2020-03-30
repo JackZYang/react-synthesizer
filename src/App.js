@@ -28,9 +28,13 @@ const App = () => {
         />
       </div>
       <div className="effects">
-        <ChangeWaveform changeWaveform={inputChange} />
+        <ChangeWaveform inputChange={inputChange} waveform={effects.waveform} />
         <Gain inputChange={inputChange} gainValue={effects.gainValue} />
-        <Filter inputChange={inputChange} filterFreq={effects.filterFreq} />
+        <Filter
+          inputChange={inputChange}
+          filterType={effects.filterType}
+          filterFreq={effects.filterFreq}
+        />
       </div>
     </div>
   );

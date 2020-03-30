@@ -23,7 +23,6 @@ const Oscillator = ({ waveform, filterType, filterFreq, gainValue }) => {
     gainNode.gain.value = gainValue;
     oscillator.frequency.value = Math.pow(2, (midiNumber - 69) / 12) * 440;
     setOscillators({ ...oscillators, [midiNumber]: oscillator });
-    console.log(waveform);
     oscillator.start();
   };
 
